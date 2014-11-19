@@ -25,11 +25,12 @@ module CamelCaser
             Rack::Request
           end.new(env)
           if request.post?
-            if env["rack.request.form_hash"]
-              Strategies::FormHash.handle(env)
+            strategy = if env["rack.request.form_hash"]
+              Strategies::FormHash
             else
-              Strategies::RawInput.handle(env)
+              Strategies::RawInput
             end
+            strategy.handle(env)
           end
         end
       end
