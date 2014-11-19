@@ -1,5 +1,7 @@
-require 'camel_caser/core_ext/hash'
 require 'active_support/core_ext/string'
+if ActiveSupport::VERSION::STRING.match(/3.\d+.\d+/)
+  require 'camel_caser/core_ext/hash' 
+end
 
 module CamelCaser
   class Middleware
