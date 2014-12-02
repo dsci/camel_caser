@@ -24,7 +24,8 @@ module CamelCaser
         unless params.empty?
           json = MultiJson.dump(transform_params(params))
           @env['rack.input'] = StringIO.new(json)
-          @env['rack.input'].rewind   
+          @env['rack.input'].rewind
+          @env['CONTENT_LENGTH'] = json.length
         end
       end
 
